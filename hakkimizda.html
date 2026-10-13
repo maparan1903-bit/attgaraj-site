@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hakkımızda — ATT Garaj | Mercedes-Benz Özel Servis</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* Sayfa özel stiller */
+    .page-hero { background: var(--dark); padding: 160px 0 80px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .page-hero-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+    .page-hero h1 { font-size: clamp(36px,5vw,60px); font-weight: 800; color: var(--white); letter-spacing: -1px; line-height: 1.1; margin-bottom: 20px; }
+    .page-hero h1 em { font-style: normal; color: var(--gold); }
+    .page-hero p { font-size: 17px; color: rgba(255,255,255,0.6); font-weight: 500; line-height: 1.8; }
+    .page-hero-visual { display: flex; flex-direction: column; gap: 16px; }
+    .page-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .page-stat-box { background: rgba(255,255,255,0.04); padding: 32px 24px; border: 1px solid rgba(255,255,255,0.06); }
+    .page-stat-box .num { font-size: 40px; font-weight: 800; color: var(--white); line-height: 1; }
+    .page-stat-box .num sup { font-size: 20px; color: var(--gold); }
+    .page-stat-box .lbl { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 8px; }
+
+    .story-section { padding: 100px 0; }
+    .story-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .story-text h2 { font-size: clamp(28px,3vw,40px); font-weight: 800; margin-bottom: 24px; }
+    .story-text p { font-size: 15px; color: #555; font-weight: 500; line-height: 1.9; margin-bottom: 16px; }
+    .story-timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item { display: flex; gap: 24px; padding-bottom: 36px; position: relative; }
+    .tl-item:not(:last-child)::after { content:''; position: absolute; left: 19px; top: 40px; bottom: 0; width: 1px; background: #e4e4e4; }
+    .tl-dot { width: 40px; height: 40px; background: var(--dark); border: 2px solid var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--gold); letter-spacing: 0; }
+    .tl-content h4 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+    .tl-content p { font-size: 14px; color: #666; font-weight: 500; line-height: 1.6; }
+
+    .values-section { padding: 100px 0; background: var(--dark); }
+    .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 64px; }
+    .val-card { padding: 48px 36px; border: 1px solid rgba(255,255,255,0.06); }
+    .val-icon { font-size: 36px; margin-bottom: 20px; }
+    .val-card h3 { font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 12px; }
+    .val-card p { font-size: 14px; color: rgba(255,255,255,0.5); font-weight: 500; line-height: 1.7; }
+
+    .team-section { padding: 100px 0; background: var(--light); }
+    .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 64px; }
+    .team-card { background: var(--white); }
+    .team-photo { height: 220px; background: var(--dark); display: flex; align-items: center; justify-content: center; font-size: 56px; }
+    .team-info { padding: 24px 20px; }
+    .team-info h4 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+    .team-info span { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); }
+
+    .cert-section { padding: 80px 0; }
+    .cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 48px; }
+    .cert-item { background: var(--light); padding: 28px 20px; text-align: center; border: 1px solid #e8e8e8; }
+    .cert-item .cert-icon { font-size: 32px; margin-bottom: 12px; }
+    .cert-item p { font-size: 13px; font-weight: 700; color: var(--dark2); line-height: 1.4; }
+
+    @media(max-width:860px) {
+      .page-hero-inner,.story-inner { grid-template-columns:1fr; gap:40px; }
+      .values-grid,.team-grid,.cert-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:640px) {
+      .page-stat-grid { grid-template-columns:1fr 1fr; }
+      .values-grid,.cert-grid { grid-template-columns:1fr; }
+      .team-grid { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>Ataşehir'in Mercedes-Benz Özel Servisi</span>
+      <div class="topbar-right">
+        <a href="tel:+905517251209">📞 0551 725 12 09</a>
+        <span>|</span>
+        <a href="tel:+905392369957">0539 236 99 57</a>
+        <span>|</span>
+        <span>Pzt–Cum: 08:00–18:00 &nbsp;|&nbsp; Cmt: 09:00–16:00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-emblem">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <circle cx="20" cy="20" r="19" stroke="#ADADAD" stroke-width="1.5"/>
+            <circle cx="20" cy="20" r="14" stroke="#ADADAD" stroke-width="0.8" stroke-dasharray="2 2"/>
+            <path d="M20 4 L20 20 L32 30" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 4 L20 20 L8 30" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-main">ATT GARAJ</span>
+          <span class="logo-sub">Mercedes‑Benz Özel Servis</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#hizmetler">Hizmetler</a>
+        <a href="hakkimizda.html" style="color:var(--gold);">Hakkımızda</a>
+        <a href="parcalar.html">Parçalar</a>
+        <a href="index.html#galeri">Galeri</a>
+        <a href="index.html#iletisim">İletişim</a>
+      </nav>
+      <a href="randevu.html" class="btn-silver nav-cta">Randevu Al</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu">
+      <a href="index.html#hizmetler">Hizmetler</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="parcalar.html">Parçalar</a>
+      <a href="index.html#galeri">Galeri</a>
+      <a href="index.html#iletisim">İletişim</a>
+      <a href="randevu.html" class="btn-silver mobile-cta">Randevu Al</a>
+    </nav>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div>
+        <span class="section-tag" style="color:var(--gold);border-bottom-color:var(--gold);">Hakkımızda</span>
+        <h1>20 Yıllık <em>Mercedes</em><br/>Tutkusu</h1>
+        <p>2004'ten bu yana Ataşehir'de yalnızca Mercedes-Benz araçlarına odaklanıyor, her aracı bir mühendislik eseri gibi ele alıyoruz. Yetkili servis kalitesini uygun maliyetle sunmak tek hedefimizdir.</p>
+      </div>
+      <div class="page-hero-visual">
+        <div class="page-stat-grid">
+          <div class="page-stat-box"><div class="num">20<sup>+</sup></div><div class="lbl">Yıl Deneyim</div></div>
+          <div class="page-stat-box"><div class="num">8.000<sup>+</sup></div><div class="lbl">Servis İşlemi</div></div>
+          <div class="page-stat-box"><div class="num">%100</div><div class="lbl">Memnuniyet</div></div>
+          <div class="page-stat-box"><div class="num">12<sup>+</sup></div><div class="lbl">Uzman Teknisyen</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HİKAYEMİZ -->
+  <section class="story-section">
+    <div class="container story-inner">
+      <div class="story-text">
+        <span class="section-tag">Hikayemiz</span>
+        <h2>Bir Garajdan<br/>Özel Servise</h2>
+        <p>ATT Garaj, 2004 yılında Ataşehir'in kalbinde küçük bir atölye olarak kuruldu. Kurucularımız, Mercedes-Benz araçlarına duyduğu derin saygı ve mühendislik merakıyla işe başladı.</p>
+        <p>İlk yıllardan itibaren tek bir prensiple hareket ettik: Her araç, fabrikadan çıktığı günkü performansıyla müşterisine teslim edilmelidir. Bu prensip bizi bugün Ataşehir'in en güvenilir Mercedes servisi haline getirdi.</p>
+        <p>Bugün 12 sertifikalı teknisyen ve son teknoloji STAR Diagnostic ekipmanıyla her Mercedes modeline hizmet vermeye devam ediyoruz.</p>
+      </div>
+      <div class="story-timeline">
+        <span class="section-tag">Kilometre Taşları</span>
+        <div style="height:24px;"></div>
+        <div class="tl-item" data-animate>
+          <div class="tl-dot">04</div>
+          <div class="tl-content">
+            <h4>Kuruluş — 2004</h4>
+            <p>Ataşehir'de 2 teknisyen ve küçük bir atölye ile yola çıkıldı.</p>
+          </div>
+        </div>
+        <div class="tl-item" data-animate>
+          <div class="tl-dot">10</div>
+          <div class="tl-content">
+            <h4>Genişleme — 2010</h4>
+            <p>Servis alanı 3 katına çıkarıldı, STAR Diagnostic sistemi devreye alındı.</p>
+          </div>
+        </div>
+        <div class="tl-item" data-animate>
+          <div class="tl-dot">16</div>
+          <div class="tl-content">
+            <h4>Büyüme — 2016</h4>
+            <p>Ekip 10 teknisyene ulaştı, AMG uzmanlık alanı açıldı.</p>
+          </div>
+        </div>
+        <div class="tl-item" data-animate>
+          <div class="tl-dot">24</div>
+          <div class="tl-content">
+            <h4>Bugün — 2024</h4>
+            <p>12 uzman teknisyen, modern ekipman, 20 yıllık tecrübeyle hizmetinizdeyiz.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEĞERLERİMİZ -->
+  <section class="values-section">
+    <div class="container">
+      <div class="section-header light">
+        <span class="section-tag silver">Değerlerimiz</span>
+        <h2>İlkelerimiz</h2>
+        <p>Her işimizde rehber aldığımız temel değerler.</p>
+      </div>
+      <div class="values-grid">
+        <div class="val-card" data-animate>
+          <div class="val-icon">🎯</div>
+          <h3>Dürüstlük</h3>
+          <p>Her işlem öncesi yazılı teklif sunar, müşterimizin onayı olmadan hiçbir ek işlem yapılmaz.</p>
+        </div>
+        <div class="val-card" data-animate>
+          <div class="val-icon">⚙️</div>
+          <h3>Mükemmellik</h3>
+          <p>Yarım bırakılan iş yoktur. Her araç, tam çalışır durumda ve test edilerek teslim edilir.</p>
+        </div>
+        <div class="val-card" data-animate>
+          <div class="val-icon">🔒</div>
+          <h3>Güvenilirlik</h3>
+          <p>20 yıllık geçmiş, binlerce memnun müşteri ve yazılı garanti — güven inşa etmenin tek yolu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EKİBİMİZ -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Ekibimiz</span>
+        <h2>Uzman Teknisyenler</h2>
+        <p>Mercedes-Benz sertifikalı, deneyimli ekibimizle tanışın.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card" data-animate>
+          <div class="team-photo">👨‍🔧</div>
+          <div class="team-info">
+            <h4>Baş Teknisyen</h4>
+            <span>Motor & Şanzıman Uzmanı</span>
+          </div>
+        </div>
+        <div class="team-card" data-animate>
+          <div class="team-photo">👨‍🔧</div>
+          <div class="team-info">
+            <h4>Elektrik Uzmanı</h4>
+            <span>STAR Diagnostic Sertifikalı</span>
+          </div>
+        </div>
+        <div class="team-card" data-animate>
+          <div class="team-photo">👨‍🔧</div>
+          <div class="team-info">
+            <h4>AMG Uzmanı</h4>
+            <span>Yüksek Performans Sistemleri</span>
+          </div>
+        </div>
+        <div class="team-card" data-animate>
+          <div class="team-photo">👩‍💼</div>
+          <div class="team-info">
+            <h4>Müşteri Hizmetleri</h4>
+            <span>Randevu & Teknik Danışmanlık</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERTİFİKALAR -->
+  <section class="cert-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Sertifikalar</span>
+        <h2>Yetkinliklerimiz</h2>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-item" data-animate><div class="cert-icon">🏅</div><p>Mercedes-Benz<br/>Teknik Sertifika</p></div>
+        <div class="cert-item" data-animate><div class="cert-icon">🖥️</div><p>STAR Diagnostic<br/>Yetki Belgesi</p></div>
+        <div class="cert-item" data-animate><div class="cert-icon">🔧</div><p>AMG Performans<br/>Uzmanlık Belgesi</p></div>
+        <div class="cert-item" data-animate><div class="cert-icon">✅</div><p>ISO 9001<br/>Kalite Standardı</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 40 40" fill="none" width="36" height="36">
+            <circle cx="20" cy="20" r="19" stroke="#ADADAD" stroke-width="1.2"/>
+            <path d="M20 4 L20 20 L32 30" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 4 L20 20 L8 30" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <span class="footer-name">ATT GARAJ</span>
+            <span class="footer-sub">Mercedes‑Benz Özel Servis</span>
+          </div>
+        </div>
+        <p>Ataşehir'in güvenilir Mercedes-Benz özel servisi. 20 yıllık deneyim.</p>
+      </div>
+      <div class="footer-links-col">
+        <strong>Hızlı Erişim</strong>
+        <a href="index.html#hizmetler">Hizmetler</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="parcalar.html">Parçalar</a>
+        <a href="index.html#iletisim">İletişim</a>
+      </div>
+      <div class="footer-links-col">
+        <strong>Hizmetler</strong>
+        <a href="index.html#hizmetler">Periyodik Bakım</a>
+        <a href="index.html#hizmetler">Motor & Şanzıman</a>
+        <a href="index.html#hizmetler">Elektrik & Elektronik</a>
+        <a href="index.html#hizmetler">Klima Sistemi</a>
+      </div>
+      <div class="footer-links-col">
+        <strong>İletişim</strong>
+        <a href="tel:+905517251209">0551 725 12 09</a>
+        <a href="tel:+905392369957">0539 236 99 57</a>
+        <a href="mailto:info@attgaraj.com">info@attgaraj.com</a>
+        <span>Tevfik Fikret Cd. No:5/A, Ataşehir</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2025 ATT Garaj. Tüm hakları saklıdır.</span>
+        <span>Mercedes-Benz Özel Servis · Ataşehir · İstanbul</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60); });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*80); observer.unobserve(e.target); } });
+    }, {threshold:0.1});
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

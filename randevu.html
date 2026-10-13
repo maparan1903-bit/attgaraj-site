@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Randevu Al — ATT Garaj | Mercedes-Benz Özel Servis</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .randevu-hero { background: var(--dark); padding: 140px 0 64px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .randevu-hero h1 { font-size: clamp(32px,5vw,56px); font-weight: 800; color: var(--white); letter-spacing: -1px; margin-bottom: 12px; }
+    .randevu-hero h1 em { font-style: normal; color: var(--gold); }
+    .randevu-hero p { font-size: 16px; color: rgba(255,255,255,0.55); font-weight: 500; }
+
+    .randevu-body { padding: 80px 0 100px; background: var(--light); }
+    .randevu-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: start; }
+
+    /* Form */
+    .randevu-form-wrap { background: var(--white); padding: 48px 44px; box-shadow: 0 4px 40px rgba(0,0,0,0.07); }
+    .randevu-form-wrap h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .randevu-form-wrap > p { font-size: 14px; color: var(--gray); font-weight: 500; margin-bottom: 32px; }
+    .form-section-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin: 28px 0 16px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+    .form-group label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #888; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--light); border: 1.5px solid #e8e8e8;
+      padding: 13px 16px; font-size: 14px; font-family: inherit; color: var(--dark);
+      outline: none; transition: border-color 0.2s; font-weight: 500;
+    }
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color: var(--gold); background: #fff; }
+    .submit-row { display: flex; align-items: center; gap: 20px; margin-top: 8px; }
+    .form-note { font-size: 12px; color: #aaa; font-weight: 500; line-height: 1.6; }
+    .form-success-box { display: none; background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.3); padding: 20px 24px; margin-top: 20px; }
+    .form-success-box p { font-size: 14px; font-weight: 700; color: #166534; }
+    .form-success-box span { font-size: 13px; color: #166534; font-weight: 500; }
+
+    /* Sidebar */
+    .randevu-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .sidebar-card { background: var(--white); padding: 32px 28px; border: 1px solid #eee; }
+    .sidebar-card h3 { font-size: 14px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--dark); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #eee; }
+    .sc-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+    .sc-item:last-child { margin-bottom: 0; }
+    .sc-icon { width: 36px; height: 36px; background: var(--light); border: 1px solid #e8e8e8; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:16px; }
+    .sc-item strong { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+    .sc-item p, .sc-item a { font-size: 14px; font-weight: 600; color: var(--dark); line-height: 1.5; }
+    .sc-item a:hover { color: var(--gold); }
+    .sidebar-card-dark { background: var(--dark); border-color: rgba(255,255,255,0.06); }
+    .sidebar-card-dark h3 { color: var(--white); border-bottom-color: rgba(255,255,255,0.1); }
+    .sidebar-card-dark p { color: rgba(255,255,255,0.55); font-size: 14px; font-weight: 500; line-height: 1.7; margin-bottom: 20px; }
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+    .step { display: flex; gap: 14px; align-items: flex-start; }
+    .step-num { width: 28px; height: 28px; background: var(--gold); color: var(--dark); font-size: 12px; font-weight: 800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .step p { font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 500; line-height: 1.5; }
+
+    @media(max-width:900px) {
+      .randevu-layout { grid-template-columns:1fr; }
+      .randevu-sidebar { order: -1; }
+      .form-row-3 { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:640px) {
+      .randevu-form-wrap { padding: 32px 20px; }
+      .form-row,.form-row-3 { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>Ataşehir'in Mercedes-Benz Özel Servisi</span>
+      <div class="topbar-right">
+        <a href="tel:+905517251209">📞 0551 725 12 09</a>
+        <span>|</span>
+        <a href="tel:+905392369957">0539 236 99 57</a>
+        <span>|</span>
+        <span>Pzt–Cum: 08:00–18:00 &nbsp;|&nbsp; Cmt: 09:00–16:00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-emblem">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <circle cx="20" cy="20" r="19" stroke="#ADADAD" stroke-width="1.5"/>
+            <circle cx="20" cy="20" r="14" stroke="#ADADAD" stroke-width="0.8" stroke-dasharray="2 2"/>
+            <path d="M20 4 L20 20 L32 30" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 4 L20 20 L8 30" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-main">ATT GARAJ</span>
+          <span class="logo-sub">Mercedes‑Benz Özel Servis</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#hizmetler">Hizmetler</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="parcalar.html">Parçalar</a>
+        <a href="index.html#galeri">Galeri</a>
+        <a href="index.html#iletisim">İletişim</a>
+      </nav>
+      <a href="randevu.html" class="btn-silver nav-cta" style="background:#fff;color:#111;">Randevu Al</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu">
+      <a href="index.html#hizmetler">Hizmetler</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="parcalar.html">Parçalar</a>
+      <a href="index.html#galeri">Galeri</a>
+      <a href="index.html#iletisim">İletişim</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="randevu-hero">
+    <div class="container">
+      <span class="section-tag silver" style="color:var(--gold);border-bottom-color:var(--gold);">Online Randevu</span>
+      <h1>Aracınız İçin<br/><em>Randevu Alın</em></h1>
+      <p>Formu doldurun, en kısa sürede sizi arayarak randevunuzu onaylayalım.</p>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <section class="randevu-body">
+    <div class="container randevu-layout">
+
+      <!-- FORM -->
+      <div class="randevu-form-wrap">
+        <h2>Randevu Talebi</h2>
+        <p>Aşağıdaki formu eksiksiz doldurun, 1 iş günü içinde sizi arayalım.</p>
+
+        <form id="randevuForm">
+          <p class="form-section-title">Kişisel Bilgiler</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ad</label>
+              <input type="text" placeholder="Adınız" required />
+            </div>
+            <div class="form-group">
+              <label>Soyad</label>
+              <input type="text" placeholder="Soyadınız" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefon</label>
+              <input type="tel" placeholder="05XX XXX XX XX" required />
+            </div>
+            <div class="form-group">
+              <label>E-posta (opsiyonel)</label>
+              <input type="email" placeholder="ornek@mail.com" />
+            </div>
+          </div>
+
+          <p class="form-section-title">Araç Bilgileri</p>
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Model</label>
+              <select>
+                <option value="">Seçin</option>
+                <option>A Serisi</option>
+                <option>C Serisi</option>
+                <option>E Serisi</option>
+                <option>S Serisi</option>
+                <option>GLA / GLB</option>
+                <option>GLC / GLE</option>
+                <option>GLS / G Serisi</option>
+                <option>AMG</option>
+                <option>Diğer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Model Yılı</label>
+              <input type="number" placeholder="2018" min="1990" max="2025" />
+            </div>
+            <div class="form-group">
+              <label>Plaka</label>
+              <input type="text" placeholder="34 ABC 123" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Kilometre (yaklaşık)</label>
+            <input type="text" placeholder="Örn: 85.000 km" />
+          </div>
+
+          <p class="form-section-title">Servis Talebi</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Hizmet Türü</label>
+              <select>
+                <option value="">Seçin</option>
+                <option>Periyodik Bakım — A Servis</option>
+                <option>Periyodik Bakım — B Servis</option>
+                <option>Motor & Şanzıman</option>
+                <option>Süspansiyon & Fren</option>
+                <option>Elektrik & Elektronik Arıza</option>
+                <option>Klima Bakımı</option>
+                <option>Genel Kontrol & Teşhis</option>
+                <option>Diğer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tercih Edilen Tarih</label>
+              <input type="date" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Tercih Edilen Saat</label>
+            <select>
+              <option value="">Seçin</option>
+              <option>08:00 – 09:00</option>
+              <option>09:00 – 10:00</option>
+              <option>10:00 – 11:00</option>
+              <option>11:00 – 12:00</option>
+              <option>13:00 – 14:00</option>
+              <option>14:00 – 15:00</option>
+              <option>15:00 – 16:00</option>
+              <option>16:00 – 17:00</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Şikayet / Notunuz</label>
+            <textarea rows="4" placeholder="Aracınızda fark ettiğiniz sorun veya belirtmek istediğiniz herhangi bir detay..."></textarea>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn-silver" style="min-width:200px;">Randevu Gönder</button>
+            <p class="form-note">Talebiniz alındıktan sonra 1 iş günü içinde<br/>sizi telefonla arayacağız.</p>
+          </div>
+        </form>
+
+        <div class="form-success-box" id="successBox">
+          <p>✅ Randevu talebiniz alındı!</p>
+          <span>En kısa sürede — genellikle 1 iş günü içinde — sizi arayarak randevunuzu onaylayacağız. Teşekkür ederiz.</span>
+        </div>
+      </div>
+
+      <!-- SİDEBAR -->
+      <div class="randevu-sidebar">
+        <div class="sidebar-card-dark sidebar-card">
+          <h3>Nasıl İşliyor?</h3>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><p>Formu doldurun ve gönderin.</p></div>
+            <div class="step"><div class="step-num">2</div><p>1 iş günü içinde sizi arayarak randevuyu onaylıyoruz.</p></div>
+            <div class="step"><div class="step-num">3</div><p>Belirlenen gün aracınızı getirin, işlem başlasın.</p></div>
+            <div class="step"><div class="step-num">4</div><p>İşlem tamamlandığında sizi bilgilendiriyoruz.</p></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>İletişim Bilgileri</h3>
+          <div class="sc-item">
+            <div class="sc-icon">📍</div>
+            <div>
+              <strong>Adres</strong>
+              <p>Küçükbakkalköy, Tevfik Fikret Cd.<br/>No:5/A, 34750 Ataşehir / İstanbul</p>
+            </div>
+          </div>
+          <div class="sc-item">
+            <div class="sc-icon">📞</div>
+            <div>
+              <strong>Telefon</strong>
+              <p><a href="tel:+905517251209">0551 725 12 09</a><br/><a href="tel:+905392369957">0539 236 99 57</a></p>
+            </div>
+          </div>
+          <div class="sc-item">
+            <div class="sc-icon">🕐</div>
+            <div>
+              <strong>Çalışma Saatleri</strong>
+              <p>Pzt – Cum: 08:00 – 18:00<br/>Cumartesi: 09:00 – 16:00</p>
+            </div>
+          </div>
+          <div class="sc-item">
+            <div class="sc-icon">📧</div>
+            <div>
+              <strong>E-posta</strong>
+              <p><a href="mailto:info@attgaraj.com">info@attgaraj.com</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Sık Sorulanlar</h3>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div>
+              <p style="font-size:13px;font-weight:800;color:var(--dark);margin-bottom:4px;">Randevu zorunlu mu?</p>
+              <p style="font-size:13px;color:var(--gray);font-weight:500;">Acil durumlar için randevusuz kabul edebiliriz, ancak bekleme süresi uzayabilir.</p>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:800;color:var(--dark);margin-bottom:4px;">Araç teslimi var mı?</p>
+              <p style="font-size:13px;color:var(--gray);font-weight:500;">Evet, randevu saatinde aracınızı bırakabilirsiniz. Hazır olduğunda sizi arayacağız.</p>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:800;color:var(--dark);margin-bottom:4px;">Fiyat teklifi alabilir miyim?</p>
+              <p style="font-size:13px;color:var(--gray);font-weight:500;">Evet. Araç muayenesinin ardından yazılı teklif sunuyoruz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 40 40" fill="none" width="36" height="36">
+            <circle cx="20" cy="20" r="19" stroke="#ADADAD" stroke-width="1.2"/>
+            <path d="M20 4 L20 20 L32 30" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 4 L20 20 L8 30" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <span class="footer-name">ATT GARAJ</span>
+            <span class="footer-sub">Mercedes‑Benz Özel Servis</span>
+          </div>
+        </div>
+        <p>Ataşehir'in güvenilir Mercedes-Benz özel servisi.</p>
+      </div>
+      <div class="footer-links-col">
+        <strong>Hızlı Erişim</strong>
+        <a href="index.html#hizmetler">Hizmetler</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="parcalar.html">Parçalar</a>
+        <a href="index.html#iletisim">İletişim</a>
+      </div>
+      <div class="footer-links-col">
+        <strong>İletişim</strong>
+        <a href="tel:+905517251209">0551 725 12 09</a>
+        <a href="tel:+905392369957">0539 236 99 57</a>
+        <a href="mailto:info@attgaraj.com">info@attgaraj.com</a>
+        <span>Tevfik Fikret Cd. No:5/A, Ataşehir</span>
+      </div>
+      <div class="footer-links-col"></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2025 ATT Garaj. Tüm hakları saklıdır.</span>
+        <span>Mercedes-Benz Özel Servis · Ataşehir · İstanbul</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60); });
+
+    document.getElementById('randevuForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('successBox').style.display = 'block';
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  </script>
+</body>
+</html>
